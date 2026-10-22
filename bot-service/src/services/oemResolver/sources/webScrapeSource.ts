@@ -4,7 +4,7 @@ import { findBestOemForVehicle } from "../../oemWebFinder";
 
 /**
  * Wraps the web-based OEM finder (PartSouq, 7zap, etc.) as a source for the resolver.
- * Treats the best OEM as high-confidence (but below TecDoc), and exposes all candidates.
+ * Treats matching web results as candidates; they remain below a verified provider-backed identity.
  */
 export const webScrapeSource: OEMSource = {
   name: "web_scrape",

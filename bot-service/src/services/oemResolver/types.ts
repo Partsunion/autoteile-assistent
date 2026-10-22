@@ -1,5 +1,3 @@
-// tecdocPartsouqFlow type not present in repo; use `any` for now to avoid missing import
-
 export interface OEMResolverRequest {
   orderId: string;
   vehicle: {
@@ -21,7 +19,7 @@ export interface OEMResolverRequest {
 export interface OEMCandidate {
   oem: string;
   brand?: string | null;
-  source: string; // e.g. "tecdoc_light", "shop_autodoc", "llm_inferred"
+  source: string; // Provider-, Shop- oder Heuristikquelle; keine Quelle ist allein eine Freigabe.
   confidence: number; // 0.0–1.0
   meta?: Record<string, any>;
 }
@@ -31,5 +29,4 @@ export interface OEMResolverResult {
   candidates: OEMCandidate[];
   overallConfidence: number;
   notes?: string;
-  tecdocPartsouqResult?: any;
 }

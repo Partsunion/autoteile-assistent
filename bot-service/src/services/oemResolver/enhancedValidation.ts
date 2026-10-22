@@ -27,7 +27,6 @@ export interface ValidationLayer {
 }
 
 export interface BacksearchResult {
-    tecdocHit: boolean;
     autodocHit: boolean;
     dapartoHit: boolean;
     ebayHit: boolean;

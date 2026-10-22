@@ -651,8 +651,7 @@ async function runOemLookupAndScraping(
           primaryOEM: legacy.oemNumber ?? (legacy.oem ?? undefined),
           overallConfidence: legacy.success ? 0.85 : 0,
           candidates: legacy.oemData?.candidates ?? [],
-          notes: legacy.message ?? undefined,
-          tecdocPartsouqResult: undefined
+          notes: legacy.message ?? undefined
         };
       } catch (err: any) {
         logger.warn("Legacy resolveOEM adapter failed", { orderId, error: err?.message });
@@ -668,8 +667,7 @@ async function runOemLookupAndScraping(
         oemNumber: oemResult.primaryOEM ?? null,
         oemConfidence: oemResult.overallConfidence ?? null,
         oemNotes: oemResult.notes ?? null,
-        oemCandidates: oemResult.candidates ?? [],
-        oemTecdocPartsouq: oemResult.tecdocPartsouqResult ?? null
+        oemCandidates: oemResult.candidates ?? []
       });
       try {
         await updateOrderOEM(orderId, {

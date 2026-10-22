@@ -1,5 +1,7 @@
 # 🎯 ENHANCED 5-LAYER OEM VALIDATION SYSTEM
 
+> Legacy design notes only. This file is not an implementation or capability record: the legacy resolver has no TecDoc/catalog-provider source, and heuristic or scraped candidates are not verified vehicle fitment. The main Partsunion provider API is the only current database-provider contract.
+
 ## Ziel: 95%+ Sicherheit bei OEM-Identifikation
 
 ---

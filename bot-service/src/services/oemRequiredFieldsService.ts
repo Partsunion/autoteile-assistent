@@ -1,7 +1,6 @@
-// import { TecDocVehicleLookup } from "./tecdocClient";
-import { TecDocVehicleLookup } from "./oemService";
+import { VehicleLookupContext } from "./oemService";
 
-export function determineRequiredFields(vehicle: TecDocVehicleLookup): string[] {
+export function determineRequiredFields(vehicle: VehicleLookupContext): string[] {
   const required: string[] = [];
 
   // If we have VIN, we can decode everything else.

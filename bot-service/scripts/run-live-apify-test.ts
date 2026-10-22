@@ -5,17 +5,20 @@ dotenv.config();
 
 async function main() {
   const token = process.env.APIFY_TOKEN;
-  const actorId = process.env.APIFY_ACTOR_ID || "making-data-meaningful/tecdoc"; // default example
+  const actorId = process.env.APIFY_ACTOR_ID?.trim();
   if (!token) {
     console.error("APIFY_TOKEN is required in env to run this script.");
+    process.exit(2);
+  }
+  if (!actorId) {
+    console.error("APIFY_ACTOR_ID must explicitly name an approved supplier actor; no catalog actor is configured by default.");
     process.exit(2);
   }
 
   const client = new ApifyClient({ token });
 
   const input = {
-    // Example input shape expected by the tecdoc actor or supplier actor.
-    // Adjust as needed for your actors.
+    // Example input shape for the explicitly configured supplier actor.
     oem: process.env.TEST_OEM || "OEM-12345",
     country: process.env.TEST_COUNTRY || "DE",
     language: process.env.TEST_LANGUAGE || "de"

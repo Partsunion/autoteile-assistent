@@ -95,7 +95,7 @@ export function AuftraegeView() {
 
   const timelineSteps = (order: Order) => [
     { label: 'Anfrage empfangen', completed: true },
-    { label: 'OEM geprüft', completed: !!(order.oem_number || order.oem) },
+    { label: 'OE-Kandidat vorhanden · Prüfung offen', completed: !!(order.oem_number || order.oem) },
     { label: 'Angebote eingeholt', completed: offers.length > 0 },
     { label: 'Kunde wartet', completed: order.status === 'collect_part', current: order.status === 'collect_part' },
     { label: 'Auftrag bestätigt', completed: order.status === 'done' },
@@ -207,14 +207,14 @@ export function AuftraegeView() {
               <div className="p-5 bg-muted/50 rounded-xl border border-border">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-muted-foreground text-sm mb-2">OEM-Nummer</div>
+                    <div className="text-muted-foreground text-sm mb-2">OE-Kandidat · ungeprüft</div>
                     <code className="px-3 py-1.5 bg-background border border-border rounded-md font-mono font-medium">
                       {(selectedOrder.oem_number || selectedOrder.oem) || 'NICHT GEFUNDEN'}
                     </code>
                   </div>
                   {(selectedOrder.oem_number || selectedOrder.oem) && (
-                    <div className="px-3 py-1.5 bg-success/10 text-success rounded-md text-sm font-medium border border-success/20">
-                      Geprüft
+                    <div className="px-3 py-1.5 bg-amber-500/10 text-amber-600 rounded-md text-sm font-medium border border-amber-500/20">
+                      Manuell prüfen · nicht verifiziert
                     </div>
                   )}
                 </div>

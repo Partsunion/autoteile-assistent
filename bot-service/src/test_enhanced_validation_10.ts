@@ -306,7 +306,6 @@ async function runEnhancedValidationTest() {
 
             // Mock backsearch result (in real scenario, this comes from backsearch.ts)
             const backsearchResult: BacksearchResult = {
-                tecdocHit: false,
                 autodocHit: false,
                 dapartoHit: false,
                 ebayHit: true,

@@ -1,5 +1,5 @@
 /**
- * Web-basierter OEM-Finder ohne TecDoc/Apify.
+ * Legacy web-based OEM candidate finder; results are not catalog verification.
  * Sucht OEMs über mehrere Webseiten und aggregiert das Ergebnis.
  * Unterstützt optional OpenAI für Query-Expansion/Re-Ranking.
  */
