@@ -26,7 +26,7 @@ Setze Confidence auf 0.5-0.7 je nach Sicherheit.`;
     try {
       const raw = await generateChatCompletion({
         messages: [
-          { role: "system", content: "Du bist ein erfahrener KFZ-Teilehändler mit Zugriff auf TecDoc-Cross-Referenz-Wissen. Sei extrem präzise." },
+          { role: "system", content: "Du bist ein KFZ-Teilehändler. Du hast keinen Katalogzugriff. Nenne nur unverbindliche Kandidaten und gib Unsicherheit offen an; deine Antwort ist keine Fahrzeugzuordnung oder Freigabe." },
           { role: "user", content: prompt }
         ],
         model: "gpt-4.1-mini" // or gpt-4o if available for better reasoning

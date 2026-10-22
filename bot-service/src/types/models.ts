@@ -54,7 +54,7 @@ export interface OemPart {
   brand?: string | null; // z.B. BMW, VAG etc.
   description?: string | null;
   vehicleId?: string | null;
-  rawTecDocData?: any; // optional: komplette TecDoc-Antwort
+  rawProviderData?: Record<string, unknown>;
 }
 
 export interface ShopOffer {

@@ -21,7 +21,7 @@ Dieses System nutzt **Multi-Source Web Scraping** mit **OpenAI-gestützter Valid
 - 7-Zap
 - Motointegrator
 - eBay
-- TecDoc (Light, VIN, Number)
+- Database-provider lookup is not implemented in this legacy scraper service.
 - Shop Search
 - LLM Heuristic
 
@@ -112,7 +112,7 @@ const oems = await openaiVisionSource.resolveCandidates({
 │ • 7-Zap       │                     └──────────────────┘
 │ • Motointegr. │
 │ • eBay        │
-│ • TecDoc      │
+│ • Supplier / web sources │
 └───────────────┘
         │
         ▼
@@ -165,9 +165,8 @@ OPENAI_API_KEY=sk-proj-...
 SCRAPE_PROXY_URL=http://proxy.example.com:8080
 HTTPS_PROXY=http://proxy.example.com:8080
 
-# TecDoc (falls verfügbar)
-TECDOC_API_TOKEN=...
-TECDOC_BASE_URL=https://webservice.tecalliance.services/...
+# Catalog data is not queried by this legacy resolver. A provider-backed result must
+# come from the main Partsunion database-provider API, not from these heuristics.
 ```
 
 ---

@@ -14,7 +14,6 @@ type ResolutionOrder = Pick<
   country: string;
   requested_oem?: string;
   vehicle_vin?: string;
-  vehicle_tecdoc_id?: string;
   // Enhanced fields for scraping
   vehicle_brand?: string;
   vehicle_model?: string;
@@ -32,7 +31,7 @@ export interface ApifyClient {
   runActorDataset<I, O>(actorId: string, input: I): Promise<O[]>;
 }
 
-// TecDoc types removed as we switched to scraping reference
+// Catalog-provider data is intentionally absent from this legacy scraper service.
 
 export class ProductResolutionService {
   constructor(private readonly db: DbClient, private readonly apifyClient: ApifyClient) { }
@@ -124,14 +123,6 @@ export class ProductResolutionService {
 
     console.warn(`[ProductResolution] No OEM found for Order ${order.id}`);
     return null;
-  }
-
-  // TecDoc Mappers removed or kept for generic fallback if needed
-  private mapLanguageToTecDocLangId(language: string | null | undefined): number {
-    return 1; // dummy path
-  }
-  private mapCountryToTecDocCountryFilterId(country: string | null | undefined): number {
-    return 1; // dummy path
   }
 
   protected async loadActiveSuppliersForDealer(dealerId: string): Promise<Supplier[]> {

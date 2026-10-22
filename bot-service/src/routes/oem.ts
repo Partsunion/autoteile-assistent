@@ -41,15 +41,26 @@ router.post("/resolve", async (req: Request, res: Response) => {
     });
   }
 
-  // OEM erfolgreich
+  // This isolated legacy resolver only scrapes public sites and uses heuristics.
+  // A hit is a candidate, never provider-backed vehicle-fitment evidence.
   await updateOrderOEM(orderId, {
-    oemStatus: "resolved",
-    oemData: { oem: result.oemNumber }
+    oemStatus: "pending",
+    oemData: {
+      candidateOem: result.oemNumber,
+      source: "legacy_web_heuristic",
+      fitmentVerified: false,
+      requiresReview: true
+    }
   });
 
   res.json({
     success: true,
-    oem: result.oemNumber
+    oem: result.oemNumber,
+    result_kind: "unverified_candidate",
+    source: "legacy_web_heuristic",
+    fitment_verified: false,
+    requires_review: true,
+    message: "Unverbindlicher Web-/Heuristik-Kandidat. Bitte die Teilezuordnung im Hauptanbieter-Arbeitsplatz prüfen."
   });
 });
 

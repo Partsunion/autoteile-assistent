@@ -3,7 +3,6 @@ import { logger } from "../../utils/logger";
 import { OEMResolverRequest } from "./types";
 
 type BacksearchResult = {
-  tecdocHit: boolean;
   webHit: boolean;     // 7zap
   autodocHit: boolean;
   dapartoHit: boolean;
@@ -11,17 +10,12 @@ type BacksearchResult = {
   totalHits: number;
 };
 
-const RAPID_KEY = process.env.TECDOC_API_KEY || process.env.RAPIDAPI_KEY || "";
-const RAPID_HOST = process.env.TECDOC_RAPID_API_HOST || process.env.RAPIDAPI_HOST || "tecdoc-catalog.p.rapidapi.com";
-const BACKSEARCH_TIMEOUT_MS = 6000; // slightly shorter per request to run in parallel
-
 /**
- * Validate a found OEM by re-querying multiple independent sources 
+ * Compare a found OEM against multiple public web sources
  * and checking for explicit vehicle compatibility.
  */
 export async function backsearchOEM(oem: string, req: OEMResolverRequest): Promise<BacksearchResult> {
   const result: BacksearchResult = {
-    tecdocHit: false,
     webHit: false,
     autodocHit: false,
     dapartoHit: false,

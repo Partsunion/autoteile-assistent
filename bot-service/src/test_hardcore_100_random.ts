@@ -249,7 +249,7 @@ async function runHardcoreTest() {
             if (topCandidate?.meta?.validationNote) {
                 const note = topCandidate.meta.validationNote;
                 // Count sources mentioned in validation note
-                const sources = ['TecDoc', 'Autodoc', 'Daparto', 'eBay', '7zap'];
+                const sources = ['OEM candidate', 'Autodoc', 'Daparto', 'eBay', '7zap'];
                 backsearchHits = sources.filter(s => note.includes(s)).length;
                 backsearchPassed = backsearchHits >= 1; // At least 1 source confirmed
             }

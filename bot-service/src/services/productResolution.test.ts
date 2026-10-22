@@ -7,17 +7,9 @@ import {
   ShopOfferInsert,
   Supplier,
   SupplierScraperProduct,
-  TecDocActorInput,
 } from "./productResolutionService";
 
-/**
- * Sketch for an end-to-end style test covering:
- * OEM lookup via TecDoc actor -> supplier scraper -> shop_offers insert.
- *
- * NOTE: This is a blueprint; replace mocks with your real test DB/apify setups.
- */
-
-describe("ProductResolutionService (E2E sketch)", () => {
+describe("ProductResolutionService supplier offer persistence", () => {
   let shopOffers: ShopOfferInsert[];
   let db: DbClient;
   let apifyClient: ApifyClient;
@@ -37,6 +29,7 @@ describe("ProductResolutionService (E2E sketch)", () => {
   const order: any = {
     id: "order-123",
     dealer_id: dealerId,
+    requested_oem: "OEM-12345",
     vehicle_vin: "WVWZZZ1JZXW000001",
     country: "DE",
     language: "de",
@@ -113,12 +106,6 @@ describe("ProductResolutionService (E2E sketch)", () => {
 
     apifyClient = {
       runActorDataset: jest.fn(async (actorId: string, input: any) => {
-        if (actorId === "making-data-meaningful/tecdoc") {
-          const tecdocInput = input as TecDocActorInput;
-          expect(tecdocInput.operation).toBe("searchArticlesByNumber");
-          return [{ oemNumber: "OEM-12345" }];
-        }
-
         // Supplier scraper response
         const products: SupplierScraperProduct[] = [
           {
@@ -146,18 +133,12 @@ describe("ProductResolutionService (E2E sketch)", () => {
     };
   });
 
-  it("resolves OEM via TecDoc actor and stores supplier offers", async () => {
+  it("uses the stored OEM and stores supplier offers without a catalog lookup", async () => {
     const service = new TestProductResolutionService(db, apifyClient, order);
 
     await service.resolveProductsForOrder(order.id);
 
-    // TecDoc actor invoked once, plus once per supplier
-    expect(apifyClient.runActorDataset).toHaveBeenCalledWith(
-      "making-data-meaningful/tecdoc",
-      expect.objectContaining({
-        operation: "searchArticlesByNumber",
-      })
-    );
+    expect(apifyClient.runActorDataset).toHaveBeenCalledTimes(1);
     expect(apifyClient.runActorDataset).toHaveBeenCalledWith(
       supplier.apify_actor_id,
       expect.objectContaining({

@@ -22,7 +22,7 @@ import { performEnhancedValidation } from "./enhancedValidation";
 
 
 // For tests and fast local runs prefer lightweight sources only.
-// Heavy web-scraping and external TecDoc modules are omitted by default
+// Heavy web-scraping sources are omitted from this default source set
 // to avoid network calls during unit tests. Additional sources can be
 // invoked explicitly from higher-level flows if needed.
 const SOURCES = [
